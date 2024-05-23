@@ -9,7 +9,7 @@ body{
     font-size: 30px;
 }
 .lado{
-    padding-bottom: 50%;
+    padding-bottom: 35%;
 }
 .tamanho-btn{
     width: 315px;
@@ -32,6 +32,6 @@ body{
     color: rgb(141, 141, 141);
 }
 .vrum{
-    width: 100px;
+    width: 200px;
     border-radius: 5px;
 }
