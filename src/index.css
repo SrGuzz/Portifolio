@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./assets/Ubuntu/Ubuntu-Regular.ttf") format("woff2");
+  font-weight: 400; /* Defina o peso da fonte, se souber */
+  font-style: normal; /* Defina o estilo, se aplicável */
+}

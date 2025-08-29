@@ -1,123 +1,21 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mooli&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
-    <title>Portfólio</title>
-
-    <!-- Bootstrap icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Davi</title>
   </head>
   <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!--Mobile-->
-            <nav class="navbar d-md-none" aria-label="First navbar example">
-                <div class="container-fluid">
-                  <p class="fonte-mobile pt-3">Portfólio</p>
-                  <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-                    <strong><i class="bi bi-list text-white"></i></strong>
-                  </button>
-            
-                  <div class="collapse navbar-collapse" id="navbarsExample01">
-                    <ul class="navbar-nav me-auto mb-2">
-                        <li class="nav-item">
-                            <a href="/Portifolio/curriculo/curriculo.html"><button class="btn tamanho-btn "><i class="bi bi-card-text fs-4"><p class="ps-3 curriculo">Curriculo</p></i></button></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Portifolio/arquivosC/c.html"><button class="btn tamanho-btn mt-2"><i class="bi bi-award fs-4"></i></i><p class="ps-3 arquivos-c">Projetos</p></i></button></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://github.com/SrGuzz"><button class="btn tamanho-btn mt-2"><i class="bi bi-github fs-4"></i><p class="ps-3 arquivos-c">GitHub</p></button></a>
-                        </li>
-                    </ul>
-                  </div>
-                </div>
-            </nav>
-            <div class="d-md-none col-12 text-center ">
-                <img src="/Portifolio/me.jpg" alt="Minha foto" class="foto-mobile">
-            </div>
-            <div class="col-12 d-md-none">
-                <p class="fs-5 nome text-center"><strong>Albert Luis Pereira de Jesus</strong></p><p class="fs-6 text-center">Estudante de Engenharia de Software <br>PUC MINAS <br>3° Periodo</p>
-            </div>
-
-            <!--Desktop-->
-            <!--Canto Esquerdo-->
-            <div class="d-none d-md-block col-md-3 border border-top-0 border-bottom-0 lado">
-                <h3 class="fonte pt-4 text-center mb-5">Portfólio</h3>
-                <div class="border-bottom">
-                    <a href="/Portifolio/curriculo/curriculo.html" ><button class="btn tamanho-btn mt-3"><i class="bi bi-card-text fs-4"><p class="ps-3 curriculo">Curriculo</p></i></button></a>
-                </div>
-                <div class="border-bottom ">
-                    <a href="/Portifolio/arquivosC/c.html" ><button class="btn tamanho-btn"><i class="bi bi-award fs-4"></i><p class="ps-3 curriculo">Projetos</p></i></button></a>
-                </div>
-                <div>
-                    <a href="https://github.com/SrGuzz" class=""><button class="btn tamanho-btn"><i class="bi bi-github fs-4"></i><p class="ps-3 arquivos-c">GitHub</p></button></a>
-                </div>
-            </div>
-
-            <!--Meio-->
-            <div class="col-md-9">
-                <div class="container-fluid d-none d-md-block">
-                    <div class="row border-bottom">
-                        <div class="d-none d-md-block d-lg-none col-12 text-center mt-3">
-                            <img src="/Portifolio/me.jpg" alt="Minha foto" class="foto-mobile">
-                        </div>
-                        <div class="d-none d-lg-block col-lg-4 text-center mb-3 ">
-                            <img src="/Portifolio/me.jpg" alt="Minha foto" class="foto d-inline-flex mt-2 me-3">
-                        </div>
-                        <div class="col-12 d-lg-none bor">
-                            <p class="fs-5 nome text-center"><strong>Albert Luis Pereira de Jesus</strong></p>
-                            <p class="fs-6 text-center">Estudante de Engenharia de Software <br>
-                                                        PUC MINAS <br>
-                                                        3° Periodo
-                            </p>
-                        </div>
-                        <div class="d-none d-lg-block col-8 mb-2">
-                            <p class="fs-5 nome"><strong>Albert Luis Pereira de Jesus</strong></p><p class="fs-6">Estudante de Engenharia de Software <br>PUC MINAS <br>3° Periodo</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="nome text-center fs-3"><strong>Sobre Mim</strong></p>
-                <div class="container">
-                    <div class="row">
-                        <div class="d-none d-lg-block col-2"></div>
-                        <div class="col-lg-8">
-                            Sou um jovem dedicado residente de São Francisco - Belo Horizonte, MG. Com um profundo interesse na área de Tecnologia da Informação (TI) e uma sede insaciável por aprendizado, busco oportunidades para aplicar e aprimorar meus conhecimentos em programação. <br><br>
-                            Atualmente, estou cursando Engenharia de Software na renomada PUC Minas, cursando o segundo período da minha jornada acadêmica. Minha paixão por programação me levou a adquirir habilidades básicas em linguagens como HTML, CSS, JavaScript, Bootstrap, C e Python. Meu entusiasmo me levou a buscar conhecimento por conta própria, com a realização de cursos online na "Curso em Vídeo" para fortalecer minha competência em Python. <br><br>
-                            Sou movido pela motivação e pela capacidade de aprendizado rápido. Minha energia e determinação são evidentes em meu desejo de ingressar no mercado de trabalho de tecnologia e contribuir para o crescimento de uma empresa. Estou ansioso para enfrentar desafios, colaborar em projetos inovadores e expandir meu horizonte profissional. <br><br>
-                            Além de sua formação acadêmica e conhecimentos em TI, possuo experiência profissional que demonstra minha ética de trabalho e habilidades práticas. Atualmente como Estagiario em Siatemas de Geoprocessamento na prefeitura de Esmeraldas - MG, desempenho funções que vão de atuar na manutenção de redes e computadores à confecção de inforações basicas dos imoveis do municipio. Ja atuei como Ajudante de Motorista na Planeta Comércio Distribuição e Incorporação LTDA, desempenhei funções essenciais, como o carregamento de caminhões com paleteira e transpaleteira elétrica, a separação de pedidos e a descarga de mercadorias em rotas de entregas. Antes disso, como Repositor de Mercadorias na Cerealista Nova Safra Ltda, organizava estoque e prateleiras, destacando minha capacidade de organização. <br><br>
-                            Também possuo certificações e licenças que atestam minha competência, incluindo o Certificado de Operador de Empilhadeira e a CNH Categoria AB. <br><br>
-                            Meu desejo de crescimento profissional e dedicação ao aprendizado me fazem um candidato promissor para qualquer equipe de TI ou empresa que busque um membro comprometido e talentoso para contribuir com seu sucesso. Com uma combinação única de habilidades técnicas, ética de trabalho e paixão pela tecnologia, estou preparado para alcançar grandes realizações em minha carreira futura.
-                        <div class="d-none d-lg-block col-2"></div>
-                    </div>
-                </div>
-            </div>
-            <h3 class="fonte text-center mt-4">Redes</h3>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12 d-inline-flex justify-content-center">
-                                <a href="https://www.instagram.com/albertluis__/" target="_blank"><i class="bi bi-instagram insta "><p class="d-inline-flex link-dark pe-4 ps-2">Instagram</p></i></a>   
-                                <p class="d-inline-flex link-dark pe-4">|</p>
-                                <a href="https://wa.me/qr/7RVSS3KUBEUTN1" target="_blank"><i class="bi bi-whatsapp wpp"><p class="d-inline-flex link-dark pe-4 ps-2">Whatsapp</p></i></a>
-                                <p class="d-inline-flex link-dark pe-4">|</p>
-                                <a href="https://www.linkedin.com/in/albert-luis-053177209/" target="_blank"><i class="bi bi-linkedin " ></i><p class="d-inline-flex link-dark pe-4 ps-2">Linkedin</p></a>
-                            </div>
-                        </div>
-                    </div>
-            <p class="text-center tamanho-copy"><i class="bi bi-c-circle"></i> 2023 Portfólio from Albert</p>
-        </div>
+    <div id="root">
+      <h1>olá mundo</h1>
     </div>
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
