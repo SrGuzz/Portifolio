@@ -1,6 +1,7 @@
 import { Instagram, Github, Linkedin, Mail } from "lucide-react";
 import { Links } from "../data/constants";
 import Wave from "../assets/wave14.svg";
+import {USER_INFO} from "../data/constants";
 
 function footer() {
   return (
@@ -24,7 +25,7 @@ function footer() {
           </div>
           <div className="border-t border-gray-600 p-4 text-gray-300 mt-2">
             <p className="text-center">
-              © 2025 Code With Davi Benjamim All Rigths Reserved
+              © 2025 Code With {USER_INFO.name} All Rigths Reserved
             </p>
           </div>
         </footer>

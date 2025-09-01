@@ -66,56 +66,58 @@ export function Contact() {
             </h1>
           </div>
 
-          <div className="flex gap-4 m-auto flex-col lg:flex-row">
-            <div className="flex flex-col gap-6 lg:w-1/2 justify-center">
-              <div className="flex flex-col items-center gap-[20px]">
-                <div className="border-2 lg:w-[80%] w-full p-2 bg-gray-300 flex gap-1 shadow-md rounded-xl">
-                  <div className="p-3 rounded-xl">
-                    <Mail color="#334155" />
+          <div className="flex gap-20 m-auto flex-col lg:flex-row">
+            <div className="flex flex-col lg:w-1/2 justify-between">
+              <div className="grid gap-y-5">
+                <div className="flex flex-col items-center gap-5">
+                  <div className="border-2 w-full p-2 bg-gray-300 flex gap-1 shadow-md rounded-xl">
+                    <div className="p-3 rounded-xl">
+                      <Mail color="#334155" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-slate-700 font-bold font-ubuntu text-sm">
+                        Email
+                      </span>
+                      <span className="font-ubuntu ">{USER_INFO.email}</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-slate-700 font-bold font-ubuntu text-sm">
-                      Email
-                    </span>
-                    <span className="font-ubuntu ">{USER_INFO.email}</span>
-                  </div>
-                </div>
 
-                <div className="border-2 lg:w-[80%] w-full   p-2 bg-gray-300 flex gap-1 shadow-md rounded-xl">
-                  <div className="p-3">
-                    <MapPin color="#334155" />
+                  <div className="border-2 w-full p-2 bg-gray-300 flex gap-1 shadow-md rounded-xl">
+                    <div className="p-3">
+                      <MapPin color="#334155" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-slate-700 font-bold font-ubuntu text-sm">
+                        Location
+                      </span>
+                      <span className="font-ubuntu">Belo Horizonte, Brasil</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-slate-700 font-bold font-ubuntu text-sm">
-                      Location
-                    </span>
-                    <span className="font-ubuntu">Belo Horizonte, Brasil</span>
+                </div>
+                
+                <div className="flex justify-between lg:gap-4 mx-auto w-full">
+                  <div className=" py-5 px-10 rounded-xl bg-neutral">
+                    <a href={Links.Github}>
+                      {" "}
+                      <Github color="#fff" />
+                    </a>
                   </div>
-                </div>
-              </div>
-              
-              <div className="flex justify-between lg:gap-4 mx-auto lg:w-[80%]">
-                <div className=" py-5 px-10 rounded-xl bg-neutral">
-                  <a href={Links.Github}>
-                    {" "}
-                    <Github color="#fff" />
-                  </a>
-                </div>
-                <div className=" py-5 px-10 rounded-xl bg-gradient-to-br from-[#b60fcf]  to-[#fd7601]">
-                  <a href={Links.Instagram}>
-                    <Instagram color="#fff" />
-                  </a>
-                </div>
-                <div className=" py-5 px-10 rounded-xl bg-[#0967C2]">
-                  <a href={Links.Linkedin}>
-                    {" "}
-                    <Linkedin color="#fff" />
-                  </a>
-                </div>
-                <div className=" py-5 px-10 rounded-xl bg-[#FF9900]">
-                  <a href={Links.Email}>
-                    <Mail color="#fff" />
-                  </a>
+                  <div className=" py-5 px-10 rounded-xl bg-gradient-to-br from-[#b60fcf]  to-[#fd7601]">
+                    <a href={Links.Instagram}>
+                      <Instagram color="#fff" />
+                    </a>
+                  </div>
+                  <div className=" py-5 px-10 rounded-xl bg-[#0967C2]">
+                    <a href={Links.Linkedin}>
+                      {" "}
+                      <Linkedin color="#fff" />
+                    </a>
+                  </div>
+                  <div className=" py-5 px-10 rounded-xl bg-[#FF9900]">
+                    <a href={Links.Email}>
+                      <Mail color="#fff" />
+                    </a>
+                  </div>
                 </div>
               </div>
               <span className="font-ubuntu text-Neutral-300  text-center">
