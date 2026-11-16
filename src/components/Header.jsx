@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { nav, site } from '../data/content';
+import { LANGUAGES, useLanguage } from '../i18n/language';
 import { cx, prefersReduced } from '../lib/env';
 import { gsap, useGSAP } from '../lib/fx';
 import { CHAPTERS, journey } from '../lib/journey';
@@ -8,6 +8,8 @@ import { openContact } from '../lib/contactBus';
 import { Button, Logo, Roll } from './primitives';
 
 export function Header({ ready }) {
+  const { lang, setLang, content } = useLanguage();
+  const { nav, site, ui } = content;
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
@@ -94,7 +96,7 @@ export function Header({ ready }) {
           <a
             href="#topo"
             className="header__brand"
-            aria-label={`${site.name}, voltar ao início`}
+            aria-label={`${site.name}, ${ui.backHome}`}
             onClick={(event) => {
               event.preventDefault();
               go('inicio');
@@ -103,7 +105,7 @@ export function Header({ ready }) {
             <Logo size={22} />
           </a>
 
-          <nav className="header__nav" aria-label="Navegação principal">
+          <nav className="header__nav" aria-label={ui.mainNav}>
             <ul>
               {nav.map((item) => (
                 <li key={item.chapter}>
@@ -122,8 +124,23 @@ export function Header({ ready }) {
           </nav>
 
           <div className="header__actions">
+            <div className="lang" role="group" aria-label={ui.language}>
+              {LANGUAGES.map((item) => (
+                <button
+                  key={item.code}
+                  type="button"
+                  lang={item.code === 'en' ? 'en' : 'pt-BR'}
+                  className={cx('lang__option', lang === item.code && 'is-active')}
+                  aria-pressed={lang === item.code}
+                  aria-label={item.name}
+                  onClick={() => setLang(item.code)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
             <Button size="sm" className="header__cta" onClick={() => openContact()}>
-              Contato
+              {ui.contact}
             </Button>
             <button
               ref={toggleRef}
@@ -133,7 +150,7 @@ export function Header({ ready }) {
               aria-controls="menu-principal"
               onClick={() => setOpen((value) => !value)}
             >
-              <span className="sr-only">{open ? 'Fechar menu' : 'Abrir menu'}</span>
+              <span className="sr-only">{open ? ui.closeMenu : ui.openMenu}</span>
               <span className="header__toggle-lines" aria-hidden="true" />
             </button>
           </div>
@@ -141,7 +158,7 @@ export function Header({ ready }) {
       </header>
 
       <div ref={menuRef} id="menu-principal" className="menu" aria-hidden={!open} inert={open ? undefined : ''}>
-        <nav className="menu__nav" aria-label="Menu">
+        <nav className="menu__nav" aria-label={ui.menu}>
           <ul className="menu__list">
             {nav.map((item, index) => (
               <li key={item.chapter} className="menu__mask">
@@ -162,7 +179,7 @@ export function Header({ ready }) {
                 }}
               >
                 <span className="menu__index">{String(nav.length + 1).padStart(2, '0')}</span>
-                Contato
+                {ui.contact}
               </button>
             </li>
           </ul>

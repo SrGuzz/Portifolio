@@ -1,11 +1,11 @@
-import { ninaDemo } from '../data/content';
+import { useContent } from '../i18n/language';
 import { Icon } from '../components/primitives';
 
 // Tela ilustrativa da Nina, montada em código: uma conversa fictícia no
 // WhatsApp e o caminho que cada mensagem percorre. Fica dentro de um
 // <button>, por isso só usa <span>. Os tamanhos seguem a largura do cartão.
 
-function Message({ message }) {
+function Message({ message, audioLabel }) {
   if (message.from === 'tools') {
     return (
       <span className="nina__tools" data-msg>
@@ -29,7 +29,7 @@ function Message({ message }) {
             ))}
           </span>
           <span className="nina__time">{message.audio}</span>
-          <span className="nina__tag">Áudio transcrito</span>
+          <span className="nina__tag">{audioLabel}</span>
         </span>
       )}
       <span>{message.text}</span>
@@ -38,6 +38,7 @@ function Message({ message }) {
 }
 
 export function NinaScreen() {
+  const { ninaDemo, ui } = useContent();
   return (
     <span className="nina" aria-hidden="true">
       <span className="nina__chat">
@@ -56,7 +57,7 @@ export function NinaScreen() {
         </span>
         <span className="nina__messages">
           {ninaDemo.messages.map((message, index) => (
-            <Message key={index} message={message} />
+            <Message key={index} message={message} audioLabel={ui.audio} />
           ))}
         </span>
       </span>

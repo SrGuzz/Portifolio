@@ -1,4 +1,5 @@
-// Todo o conteúdo do site em um só lugar.
+// Conteúdo do site em português. A versão em inglês fica em content.en.js
+// e precisa ter exatamente a mesma estrutura.
 // Fonte dos dados: perfil do LinkedIn (linkedin.com/in/albert-luis) e,
 // para o Navalha e a Nina, a documentação dos próprios projetos.
 // Trechos entre **asteriscos** recebem o destaque dourado animado.
@@ -7,7 +8,13 @@ import navalha from '../assets/projects/navalha.webp';
 import portalConselhos from '../assets/projects/portal-conselhos.webp';
 import glet from '../assets/projects/glet.webp';
 import cvPt from '../assets/CV-PT.pdf';
-import cvEn from '../assets/CV-EN.pdf';
+
+export const meta = {
+  htmlLang: 'pt-BR',
+  title: 'Albert Luis · Desenvolvedor de Software',
+  description:
+    'Portfólio de Albert Luis, desenvolvedor de software em Belo Horizonte. IA aplicada, Python, APIs e automação.',
+};
 
 export const site = {
   name: 'Albert Luis',
@@ -21,9 +28,8 @@ export const site = {
     { label: 'GitHub', href: 'https://github.com/SrGuzz' },
     { label: 'Instagram', href: 'https://www.instagram.com/albertluis__/' },
   ],
-  cv: { pt: cvPt, en: cvEn },
-  // Endpoint do formulário de contato (Formspree).
-  formEndpoint: 'https://formspree.io/f/xwpnnrzw',
+  // Função serverless (api/contact.js) que envia o contato por e-mail via Resend.
+  contactEndpoint: '/api/contact',
 };
 
 export const nav = [
@@ -239,6 +245,8 @@ export const contact = {
   lead: 'Tem um projeto, uma ideia ou quer trocar uma ideia sobre tecnologia? Me conte o que você precisa.',
   cta: 'Entrar em contato',
   cv: 'Currículo',
+  cvHref: cvPt,
+  cvFile: 'Albert-Luis-Curriculo.pdf',
   services: ['Python', 'APIs', 'Automação', 'IA'],
   rights: 'Todos os direitos reservados.',
 };
@@ -248,4 +256,63 @@ export const drawer = {
   lead: 'Conte um pouco sobre o que você precisa. Eu respondo com os próximos passos.',
   needs: ['Projeto', 'Oportunidade', 'Parceria', 'Só um oi'],
   privacy: 'Seus dados são usados só para responder a este contato.',
+};
+
+// Textos de interface (rótulos, botões, mensagens e acessibilidade).
+export const ui = {
+  skip: 'Pular para o conteúdo',
+  backHome: 'voltar ao início',
+  mainNav: 'Navegação principal',
+  menu: 'Menu',
+  openMenu: 'Abrir menu',
+  closeMenu: 'Fechar menu',
+  contact: 'Contato',
+  chapter: 'Capítulo',
+  chapters: {
+    inicio: 'Início',
+    sobre: 'Sobre',
+    projetos: 'Projetos',
+    trajetoria: 'Trajetória',
+    stack: 'Stack',
+    contato: 'Contato',
+  },
+  language: 'Idioma',
+  scenes: {
+    intro: 'Início',
+    about: 'Sobre',
+    manifesto: 'Manifesto',
+    services: 'O que eu faço',
+    projects: 'Projetos',
+    gallery: 'Galeria de projetos',
+    path: 'Trajetória',
+    steps: 'Etapas da trajetória',
+    details: 'Fechamento da trajetória',
+    stack: 'Stack',
+    tech: 'Tecnologias',
+    contact: 'Contato',
+  },
+  technologies: 'Tecnologias',
+  features: 'Funcionalidades',
+  openProject: 'Abrir projeto',
+  talk: 'Conversar',
+  area: 'ÁREA',
+  copy: 'Copiar',
+  copied: 'Copiado',
+  audio: 'Áudio transcrito',
+  form: {
+    close: 'Fechar',
+    name: 'Nome',
+    email: 'E-mail',
+    company: 'Empresa (opcional)',
+    subject: 'Sobre o que você quer falar?',
+    message: 'Mensagem',
+    send: 'Enviar mensagem',
+    sending: 'Enviando…',
+    defaultSubject: 'Contato pelo portfólio',
+    errName: 'Informe o seu nome.',
+    errEmail: 'Informe um e-mail válido.',
+    errMessage: 'Escreva uma mensagem com pelo menos 10 caracteres.',
+    sent: 'Mensagem enviada. Obrigado pelo contato, respondo em breve!',
+    failed: 'Não foi possível enviar agora. Se preferir, escreva para',
+  },
 };

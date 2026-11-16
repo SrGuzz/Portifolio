@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { site } from '../data/content';
+import { useContent } from '../i18n/language';
 import { prefersReduced, session } from '../lib/env';
 import { gsap, useGSAP } from '../lib/fx';
 import { lockScroll } from '../lib/smooth';
@@ -9,6 +9,7 @@ const SEEN_KEY = 'albertluis:intro';
 
 /** Tela de abertura: o monograma se desenha, o contador vai a 100 e o painel sobe. */
 export function Loader({ onReveal }) {
+  const { site } = useContent();
   const rootRef = useRef(null);
   const lineRef = useRef(null);
   const dotRef = useRef(null);

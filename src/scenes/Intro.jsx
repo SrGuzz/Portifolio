@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import { intro, site } from '../data/content';
+import { useContent } from '../i18n/language';
 import { useScene } from '../lib/fx';
 import { Scene } from '../components/primitives';
 
 /** Abertura: o cenário 3D ocupa a tela; aqui ficam só as legendas. */
 export function Intro() {
+  const { intro, site, ui } = useContent();
   const ref = useRef(null);
 
   useScene(ref, 0, (tl) => {
@@ -12,7 +13,7 @@ export function Intro() {
   });
 
   return (
-    <Scene ref={ref} anchor={0} label="Início" className="intro">
+    <Scene ref={ref} anchor={0} label={ui.scenes.intro} className="intro">
       <h1 className="sr-only">{intro.title}</h1>
       <p className="intro__side mono-label" aria-hidden="true">
         <span>{site.role}</span>

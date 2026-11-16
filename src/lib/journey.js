@@ -7,13 +7,14 @@ import { getLenis } from './smooth';
 // a jornada posiciona todas as timelines no tempo (J atual - J inicial).
 // O mundo 3D lê o mesmo J para interpolar câmera e formações.
 
+// Os nomes de cada capítulo ficam em ui.chapters, no conteúdo de cada idioma.
 export const CHAPTERS = [
-  { id: 'inicio', label: 'Início', anchor: 0, from: 0 },
-  { id: 'sobre', label: 'Sobre', anchor: 1.16, from: 1 },
-  { id: 'projetos', label: 'Projetos', anchor: 2.14, from: 2 },
-  { id: 'trajetoria', label: 'Trajetória', anchor: 3.72, from: 3.6 },
-  { id: 'stack', label: 'Stack', anchor: 4.78, from: 4.6 },
-  { id: 'contato', label: 'Contato', anchor: 6.2, from: 5.6 },
+  { id: 'inicio', anchor: 0, from: 0 },
+  { id: 'sobre', anchor: 1.16, from: 1 },
+  { id: 'projetos', anchor: 2.14, from: 2 },
+  { id: 'trajetoria', anchor: 3.72, from: 3.6 },
+  { id: 'stack', anchor: 4.78, from: 4.6 },
+  { id: 'contato', anchor: 6.2, from: 5.6 },
 ];
 
 // Quanto de rolagem (em vh) cada trecho de J consome.

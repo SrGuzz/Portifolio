@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { stack } from '../data/content';
+import { useContent } from '../i18n/language';
 import { blurOut, fadeOut, fadeUp, hide, show, useScene, wordsIn } from '../lib/fx';
 import { Chip, Icon, Scene } from '../components/primitives';
 
@@ -7,6 +7,7 @@ const INTRO_START = 4.6;
 const PANEL_START = 5.04;
 
 export function StackIntro() {
+  const { stack, ui } = useContent();
   const ref = useRef(null);
 
   useScene(ref, INTRO_START, (tl, { reduced }) => {
@@ -27,7 +28,7 @@ export function StackIntro() {
   });
 
   return (
-    <Scene ref={ref} anchor={4.82} label="Stack" className="stack-intro">
+    <Scene ref={ref} anchor={4.82} label={ui.scenes.stack} className="stack-intro">
       <div className="stack-intro__text">
         <span data-chip>
           <Chip index="04" label={stack.chip} />
@@ -45,6 +46,7 @@ export function StackIntro() {
 
 /** Painel de vidro: camadas isométricas à esquerda, tecnologias à direita. */
 export function StackPanel() {
+  const { stack, ui } = useContent();
   const ref = useRef(null);
 
   useScene(ref, PANEL_START, (tl, { reduced }) => {
@@ -73,7 +75,7 @@ export function StackPanel() {
   });
 
   return (
-    <Scene ref={ref} anchor={5.34} label="Tecnologias" className="panel-scene">
+    <Scene ref={ref} anchor={5.34} label={ui.scenes.tech} className="panel-scene">
       <div className="panel" data-panel>
         <div className="layers" aria-hidden="true">
           {stack.layers.map((layer, index) => (

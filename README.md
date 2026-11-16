@@ -30,7 +30,9 @@ npm run preview  # serve a versão de produção localmente
 
 ```
 src/
-├─ data/content.js     todo o texto e os links do site
+├─ data/content.pt.js  texto e links em português
+├─ data/content.en.js  mesma estrutura, em inglês
+├─ i18n/language.jsx   idioma ativo (URL ?lang=, escolha salva ou navegador)
 ├─ lib/
 │  ├─ journey.js       converte o scroll em um valor contínuo (J) e guia as timelines
 │  ├─ smooth.js        rolagem suave e navegação por teclado
@@ -50,8 +52,22 @@ src/
 
 A página tem um espaçador com a altura total da rolagem. `journey.js` transforma a posição do scroll em um valor `J`; cada cena registra uma timeline pausada do GSAP com um `J` inicial, e a cada frame a timeline é posicionada em `J atual - J inicial`. O cenário 3D lê o mesmo `J` para interpolar câmera, tema e formação das peças.
 
-Para mudar um texto, edite `src/data/content.js`. Para mudar o ritmo de um capítulo, ajuste `SEGMENTS` em `src/lib/journey.js`.
+Para mudar um texto, edite `src/data/content.pt.js` e `src/data/content.en.js` (as duas versões têm a mesma estrutura). O seletor PT/EN fica no cabeçalho, e `?lang=en` na URL abre o site direto em inglês. Para mudar o ritmo de um capítulo, ajuste `SEGMENTS` em `src/lib/journey.js`.
+
+## Formulário de contato
+
+O formulário envia para `/api/contact` (`api/contact.js`), uma função serverless do Vercel que manda a mensagem por e-mail usando o [Resend](https://resend.com). O e-mail chega em `CONTACT_TO` (padrão: albertluis123y88@gmail.com), com resposta direta para quem escreveu.
+
+Variáveis de ambiente (modelo em `.env.example`):
+
+| Variável | Obrigatória | Uso |
+|---|---|---|
+| `RESEND_API_KEY` | sim | chave da API do Resend |
+| `CONTACT_TO` | não | destino das mensagens |
+| `CONTACT_FROM` | não | remetente; precisa ser de um domínio verificado no Resend. Sem domínio, `onboarding@resend.dev` só entrega para o e-mail dono da conta |
+
+Para testar localmente, crie `.env.local` com essas variáveis: o `npm run dev` também serve `/api/contact`.
 
 ## Deploy
 
-O push na branch `main` dispara o workflow em `.github/workflows/deploy.yml`, que roda `npm run build` e publica a pasta `build/` no GitHub Pages.
+O site está no Vercel, ligado a este repositório: cada push na `main` publica uma nova versão. A configuração de build fica em `vercel.json`, e as variáveis do formulário são cadastradas em Settings › Environment Variables do projeto no Vercel.

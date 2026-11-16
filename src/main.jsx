@@ -6,5 +6,10 @@ import './styles/base.css';
 import './styles/ui.css';
 import './styles/scenes.css';
 import App from './App';
+import { LanguageProvider } from './i18n/language';
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(
+  <LanguageProvider>
+    <App />
+  </LanguageProvider>,
+);

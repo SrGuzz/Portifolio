@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { journeyPath } from '../data/content';
+import { useContent } from '../i18n/language';
 import { cx } from '../lib/env';
 import { blurOut, fadeOut, fadeUp, hide, show, typeIn, useScene, wordsIn } from '../lib/fx';
 import { bindWorldLabels } from '../world/bridge';
@@ -10,10 +10,11 @@ const STEPS_START = 3.84;
 const STEP_SPAN = 0.16;
 const DETAILS_START = 4.47;
 
-const { steps } = journeyPath;
 
 /** Abertura da trajetória: quatro peças sobre a linha, com rótulos presos a elas. */
 export function PathIntro() {
+  const { journeyPath, ui } = useContent();
+  const { steps } = journeyPath;
   const ref = useRef(null);
   const nodes = useRef([]);
 
@@ -50,7 +51,7 @@ export function PathIntro() {
   });
 
   return (
-    <Scene ref={ref} anchor={3.77} label="Trajetória" className="path-intro">
+    <Scene ref={ref} anchor={3.77} label={ui.scenes.path} className="path-intro">
       <div className="path-intro__text">
         <span data-chip>
           <Chip index="03" label={journeyPath.chip} />
@@ -87,6 +88,8 @@ export function PathIntro() {
 
 /** Um cartão percorre as etapas; no fim ele escurece e as peças formam o monograma. */
 export function PathSteps() {
+  const { journeyPath, ui } = useContent();
+  const { steps } = journeyPath;
   const ref = useRef(null);
 
   useScene(ref, STEPS_START, (tl, { reduced }) => {
@@ -136,7 +139,7 @@ export function PathSteps() {
   });
 
   return (
-    <Scene ref={ref} anchor={3.92} label="Etapas da trajetória" className="steps">
+    <Scene ref={ref} anchor={3.92} label={ui.scenes.steps} className="steps">
       <div className="step-card" data-card>
         <span className="step-card__dark" data-dark aria-hidden="true" />
         <div className="step-card__stack">
@@ -180,6 +183,7 @@ export function PathSteps() {
 
 /** Frase de fechamento, emoldurada como uma seleção de ferramenta de design. */
 export function PathDetails() {
+  const { journeyPath, ui } = useContent();
   const ref = useRef(null);
   const zoomRef = useRef(null);
 
@@ -212,7 +216,7 @@ export function PathDetails() {
   });
 
   return (
-    <Scene ref={ref} anchor={4.55} label="Fechamento da trajetória" className="details">
+    <Scene ref={ref} anchor={4.55} label={ui.scenes.details} className="details">
       <div className="selection">
         <div className="selection__frame" data-frame aria-hidden="true">
           <span ref={zoomRef} className="selection__zoom">

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { services } from '../data/content';
+import { useContent } from '../i18n/language';
 import { cx } from '../lib/env';
 import { hide, show, useScene } from '../lib/fx';
 import { openContact } from '../lib/contactBus';
@@ -9,6 +9,7 @@ const START = 1.6;
 
 /** "O que eu faço": cartões de vidro que viram cartões sólidos ao entrar. */
 export function Services({ compact }) {
+  const { services, drawer, ui } = useContent();
   const ref = useRef(null);
 
   useScene(ref, START, (tl, { reduced }) => {
@@ -53,7 +54,7 @@ export function Services({ compact }) {
   });
 
   return (
-    <Scene ref={ref} anchor={1.84} label="O que eu faço" className="services">
+    <Scene ref={ref} anchor={1.84} label={ui.scenes.services} className="services">
       <div className="services__wrap">
         <p className="mono-label services__label" data-label>
           {services.label}
@@ -76,7 +77,7 @@ export function Services({ compact }) {
                 <p className="card__text" data-content>
                   {item.text}
                 </p>
-                <ul className="card__tags" data-content aria-label="Tecnologias">
+                <ul className="card__tags" data-content aria-label={ui.technologies}>
                   {item.tags.map((tag) => (
                     <li key={tag}>{tag}</li>
                   ))}
@@ -85,7 +86,7 @@ export function Services({ compact }) {
                   type="button"
                   className={cx('card__more')}
                   data-content
-                  onClick={() => openContact('Projeto')}
+                  onClick={() => openContact(drawer.needs[0])}
                 >
                   <span>{services.more}</span>
                   <Arrow />

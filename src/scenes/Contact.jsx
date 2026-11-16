@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { contact, site } from '../data/content';
+import { useContent } from '../i18n/language';
 import { fadeUp, show, useScene, wordsIn } from '../lib/fx';
 import { openContact } from '../lib/contactBus';
 import { setWorldSlot } from '../world/bridge';
@@ -18,6 +18,7 @@ const TEXT_X = MARK_WIDTH + 30;
 
 /** Letreiro com o monograma e o nome ocupando a largura da tela. */
 function Giant() {
+  const { site } = useContent();
   const ref = useRef(null);
   const [metrics, setMetrics] = useState({ width: 570, ascent: 77 });
 
@@ -73,6 +74,7 @@ function Giant() {
 }
 
 export function Contact() {
+  const { contact, site, ui } = useContent();
   const ref = useRef(null);
   const slotRef = useRef(null);
   const [copied, setCopied] = useState(false);
@@ -131,7 +133,7 @@ export function Contact() {
   };
 
   return (
-    <Scene ref={ref} anchor={6.2} label="Contato" className="contact">
+    <Scene ref={ref} anchor={6.2} label={ui.scenes.contact} className="contact">
       <div className="contact__content">
         <span data-chip>
           <Chip index="05" label={contact.chip} />
@@ -146,7 +148,7 @@ export function Contact() {
           <Button magnetic onClick={() => openContact()}>
             {contact.cta}
           </Button>
-          <Button variant="ghost" href={site.cv.pt} download="Albert-Luis-CV.pdf" icon={null}>
+          <Button variant="ghost" href={contact.cvHref} download={contact.cvFile} icon={null}>
             {contact.cv}
           </Button>
         </div>
@@ -164,7 +166,7 @@ export function Contact() {
             </a>
             <button type="button" className="contact__copy" onClick={copy}>
               <CopyIcon size={13} done={copied} />
-              {copied ? 'Copiado' : 'Copiar'}
+              {copied ? ui.copied : ui.copy}
             </button>
             {site.social.map((item) => (
               <a key={item.label} href={item.href} target="_blank" rel="noreferrer">

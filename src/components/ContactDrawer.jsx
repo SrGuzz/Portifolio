@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { drawer, site } from '../data/content';
+import { useContent } from '../i18n/language';
 import { cx, prefersReduced } from '../lib/env';
 import { lockScroll } from '../lib/smooth';
 import { closeContact, onContact } from '../lib/contactBus';
@@ -10,6 +10,8 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /** Painel lateral com o formulário de contato. */
 export function ContactDrawer() {
+  const { drawer, site, ui } = useContent();
+  const t = ui.form;
   const rootRef = useRef(null);
   const panelRef = useRef(null);
   const formRef = useRef(null);
@@ -108,9 +110,9 @@ export function ContactDrawer() {
     };
 
     const nextErrors = {};
-    if (values.nome.length < 2) nextErrors.nome = 'Informe o seu nome.';
-    if (!EMAIL_PATTERN.test(values.email)) nextErrors.email = 'Informe um e-mail válido.';
-    if (values.mensagem.length < 10) nextErrors.mensagem = 'Escreva uma mensagem com pelo menos 10 caracteres.';
+    if (values.nome.length < 2) nextErrors.nome = 'errName';
+    if (!EMAIL_PATTERN.test(values.email)) nextErrors.email = 'errEmail';
+    if (values.mensagem.length < 10) nextErrors.mensagem = 'errMessage';
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) {
       form.querySelector(`[name="${Object.keys(nextErrors)[0]}"]`)?.focus();
@@ -120,25 +122,22 @@ export function ContactDrawer() {
 
     setStatus({ kind: 'sending' });
     try {
-      const body = new FormData();
-      body.append('name', values.nome);
-      body.append('email', values.email);
-      body.append('company', values.empresa);
-      body.append('subject', values.assunto || 'Contato pelo portfólio');
-      body.append('message', values.mensagem);
-      const response = await fetch(site.formEndpoint, {
+      const response = await fetch(site.contactEndpoint, {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body,
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: values.nome,
+          email: values.email,
+          company: values.empresa,
+          subject: values.assunto || t.defaultSubject,
+          message: values.mensagem,
+        }),
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       form.reset();
-      setStatus({ kind: 'sent', message: 'Mensagem enviada. Obrigado pelo contato, respondo em breve!' });
+      setStatus({ kind: 'sent' });
     } catch {
-      setStatus({
-        kind: 'error',
-        message: `Não foi possível enviar agora. Se preferir, escreva para ${site.email}.`,
-      });
+      setStatus({ kind: 'error' });
     }
   };
 
@@ -158,7 +157,7 @@ export function ContactDrawer() {
       </label>
       {errors[name] && (
         <p className="field__error" id={`erro-${name}`}>
-          {errors[name]}
+          {t[errors[name]]}
         </p>
       )}
     </div>
@@ -178,10 +177,10 @@ export function ContactDrawer() {
         <div className="drawer__head">
           <span className="chip">
             <b>✦</b>
-            <span>Contato</span>
+            <span>{ui.contact}</span>
           </span>
           <button type="button" className="drawer__close" onClick={closeContact}>
-            <span className="sr-only">Fechar</span>
+            <span className="sr-only">{t.close}</span>
             <span aria-hidden="true" />
           </button>
         </div>
@@ -193,13 +192,13 @@ export function ContactDrawer() {
 
         <form ref={formRef} className="drawer__form" onSubmit={submit} noValidate>
           <div className="drawer__row">
-            {field('nome', 'Nome', { type: 'text', autoComplete: 'name', required: true })}
-            {field('email', 'E-mail', { type: 'email', autoComplete: 'email', required: true })}
+            {field('nome', t.name, { type: 'text', autoComplete: 'name', required: true })}
+            {field('email', t.email, { type: 'email', autoComplete: 'email', required: true })}
           </div>
-          {field('empresa', 'Empresa (opcional)', { type: 'text', autoComplete: 'organization' })}
+          {field('empresa', t.company, { type: 'text', autoComplete: 'organization' })}
 
           <fieldset className="drawer__needs">
-            <legend className="drawer__legend">Sobre o que você quer falar?</legend>
+            <legend className="drawer__legend">{t.subject}</legend>
             <div className="drawer__chips">
               {drawer.needs.map((item) => (
                 <label key={item} className="drawer__chip">
@@ -222,11 +221,11 @@ export function ContactDrawer() {
               aria-describedby={errors.mensagem ? 'erro-mensagem' : undefined}
             />
             <label className="field__label" htmlFor="contato-mensagem">
-              Mensagem
+              {t.message}
             </label>
             {errors.mensagem && (
               <p className="field__error" id="erro-mensagem">
-                {errors.mensagem}
+                {t[errors.mensagem]}
               </p>
             )}
           </div>
@@ -235,12 +234,12 @@ export function ContactDrawer() {
 
           <div className="drawer__submit">
             <Button type="submit" disabled={status.kind === 'sending'}>
-              {status.kind === 'sending' ? 'Enviando…' : 'Enviar mensagem'}
+              {status.kind === 'sending' ? t.sending : t.send}
             </Button>
             <p className="drawer__note">{drawer.privacy}</p>
           </div>
           <p className={cx('drawer__status', status.kind === 'error' && 'drawer__status--error')} role="status">
-            {status.message ?? ''}
+            {status.kind === 'sent' ? t.sent : status.kind === 'error' ? `${t.failed} ${site.email}.` : ''}
           </p>
         </form>
       </aside>

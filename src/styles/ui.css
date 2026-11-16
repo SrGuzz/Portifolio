@@ -771,3 +771,49 @@ html[data-tone='light'] .header::before {
   opacity: 1;
   scale: 1;
 }
+
+/* ---------- seletor de idioma ---------- */
+
+.lang {
+  display: inline-flex;
+  align-items: stretch;
+  height: 42px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.lang__option {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  padding: 0 8px;
+  border-radius: 4px;
+  color: var(--fg);
+  opacity: 0.6;
+  transition:
+    background-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out),
+    opacity 0.3s;
+}
+
+.lang__option:hover {
+  opacity: 1;
+}
+
+.lang__option.is-active {
+  background: var(--gold);
+  color: var(--ink);
+  opacity: 1;
+}
+
+@media (width <= 479px) {
+  .lang__option {
+    min-width: 32px;
+    padding: 0 6px;
+  }
+}

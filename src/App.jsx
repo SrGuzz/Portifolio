@@ -16,6 +16,7 @@ import { ProjectsGallery, ProjectsIntro } from './scenes/Projects';
 import { PathDetails, PathIntro, PathSteps } from './scenes/Path';
 import { StackIntro, StackPanel } from './scenes/Stack';
 import { Contact } from './scenes/Contact';
+import { useLanguage } from './i18n/language';
 
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
@@ -29,6 +30,7 @@ function useMediaQuery(query) {
 }
 
 export default function App() {
+  const { lang, content } = useLanguage();
   const [ready, setReady] = useState(false);
   const compact = useMediaQuery('(max-width: 1023px)');
 
@@ -46,7 +48,7 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#conteudo">
-        Pular para o conteúdo
+        {content.ui.skip}
       </a>
       <Loader onReveal={reveal} />
       <World />
@@ -56,7 +58,7 @@ export default function App() {
       <main id="conteudo" tabIndex={-1}>
         {/* a altura da página vem deste espaçador; o conteúdo vive no palco fixo */}
         <div aria-hidden="true" style={{ height: `${TOTAL_VH}vh` }} />
-        <Stage key={compact ? 'compact' : 'wide'}>
+        <Stage key={`${compact ? 'compact' : 'wide'}-${lang}`}>
           <Intro />
           <About />
           <Manifesto />

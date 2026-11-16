@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { about } from '../data/content';
+import { useContent } from '../i18n/language';
 import { blurOut, fadeOut, fadeUp, hide, highlightIn, show, useScene, wordsIn } from '../lib/fx';
 import { Chip, Rich, Scene, plain } from '../components/primitives';
 
@@ -7,6 +7,7 @@ const ABOUT_START = 1;
 const MANIFESTO_START = 1.3;
 
 export function About() {
+  const { about, ui } = useContent();
   const ref = useRef(null);
   const titleRef = useRef(null);
 
@@ -28,7 +29,7 @@ export function About() {
   });
 
   return (
-    <Scene ref={ref} anchor={1.18} label="Sobre" className="center">
+    <Scene ref={ref} anchor={1.18} label={ui.scenes.about} className="center">
       <div className="statement">
         <span data-chip>
           <Chip index="01" label={about.chip} />
@@ -45,6 +46,7 @@ export function About() {
 }
 
 export function Manifesto() {
+  const { about, ui } = useContent();
   const ref = useRef(null);
 
   useScene(ref, MANIFESTO_START, (tl, { reduced }) => {
@@ -71,7 +73,7 @@ export function Manifesto() {
   });
 
   return (
-    <Scene ref={ref} anchor={1.5} label="Manifesto" className="center">
+    <Scene ref={ref} anchor={1.5} label={ui.scenes.manifesto} className="center">
       <p className="sr-only">{about.manifesto.map(plain).join(' ')}</p>
       <div className="manifesto" aria-hidden="true">
         {about.manifesto.map((line) => (

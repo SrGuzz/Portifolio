@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import { projects, projectsIntro } from '../data/content';
+import * as defaults from '../data/content.pt';
+import { useContent } from '../i18n/language';
 import { blurOut, decodeIn, fadeOut, fadeUp, hide, highlightIn, show, useScene, wordsIn } from '../lib/fx';
 import { openContact } from '../lib/contactBus';
 import { Arrow, Button, Chip, Rich, Scene, plain } from '../components/primitives';
@@ -13,12 +14,13 @@ const GALLERY_START = 2.28;
 // quantidade de projetos. O passo pensado para o ritmo atual é 0.31 (4 projetos);
 // com mais projetos, aumente também o vhPerJ da galeria em lib/journey.js.
 const GALLERY_SPAN = 1.24;
-const STEP = GALLERY_SPAN / projects.length;
+const STEP = GALLERY_SPAN / defaults.projects.length;
 const enterAt = (index) => 0.02 + index * STEP;
 const leaveAt = (index) => (index + 1) * STEP;
-const GALLERY_END = leaveAt(projects.length - 1) + 0.06;
+const GALLERY_END = leaveAt(defaults.projects.length - 1) + 0.06;
 
 export function ProjectsIntro() {
+  const { projectsIntro, ui } = useContent();
   const ref = useRef(null);
 
   useScene(ref, INTRO_START, (tl, { reduced }) => {
@@ -56,7 +58,7 @@ export function ProjectsIntro() {
 
   const { card } = projectsIntro;
   return (
-    <Scene ref={ref} anchor={2.17} label="Projetos" className="pintro">
+    <Scene ref={ref} anchor={2.17} label={ui.scenes.projects} className="pintro">
       <div className="pintro__wrap">
         <span data-chip>
           <Chip index="02" label={projectsIntro.chip} />
@@ -81,7 +83,7 @@ export function ProjectsIntro() {
           </dl>
           <div className="info__foot" data-row>
             <p className="info__stack">
-              <b>{card.stackLabel ?? 'ÁREA'}</b>
+              <b>{card.stackLabel ?? ui.area}</b>
               {card.stack}
             </p>
             <Button size="sm" href={card.href}>
@@ -94,12 +96,13 @@ export function ProjectsIntro() {
   );
 }
 
-function open(project) {
+function open(project, need) {
   if (project.href) window.open(project.href, '_blank', 'noopener,noreferrer');
-  else openContact('Projeto');
+  else openContact(need);
 }
 
 export function ProjectsGallery({ compact }) {
+  const { projects, drawer, ui } = useContent();
   const ref = useRef(null);
 
   useScene(ref, GALLERY_START, (tl, { reduced }) => {
@@ -186,7 +189,7 @@ export function ProjectsGallery({ compact }) {
   const anchorOf = (index) => (GALLERY_START + enterAt(index) + 0.1).toFixed(3);
 
   return (
-    <Scene ref={ref} anchor={2.44} label="Galeria de projetos" className="gallery-scene">
+    <Scene ref={ref} anchor={2.44} label={ui.scenes.gallery} className="gallery-scene">
       <div className="gallery">
         <div className="gallery__infos">
           {projects.map((project, index) => (
@@ -210,7 +213,7 @@ export function ProjectsGallery({ compact }) {
               <p className="project__text" data-rest>
                 {project.text}
               </p>
-              <ul className="project__features" data-rest aria-label="Funcionalidades">
+              <ul className="project__features" data-rest aria-label={ui.features}>
                 {project.features.map((feature) => (
                   <li key={feature}>{feature}</li>
                 ))}
@@ -225,7 +228,7 @@ export function ProjectsGallery({ compact }) {
                     <Arrow size={14} />
                   </a>
                 ) : (
-                  <button type="button" className="link-mono" onClick={() => openContact('Projeto')}>
+                  <button type="button" className="link-mono" onClick={() => openContact(drawer.needs[0])}>
                     {project.link}
                     <Arrow size={14} />
                   </button>
@@ -243,9 +246,9 @@ export function ProjectsGallery({ compact }) {
               className="card3d"
               data-card3d
               data-anchor={anchorOf(index)}
-              data-cursor-label={project.href ? 'Abrir projeto' : 'Conversar'}
+              data-cursor-label={project.href ? ui.openProject : ui.talk}
               aria-label={`${project.link}: ${project.badge}`}
-              onClick={() => open(project)}
+              onClick={() => open(project, drawer.needs[0])}
             >
               {project.visual === 'nina' ? (
                 <NinaScreen />
